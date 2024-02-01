@@ -8,4 +8,4 @@ COPY database.db .
 
 EXPOSE 5000
 
-CMD [ "./app/sql-injection/sql-injection" ]
+CMD [ "./sql-injection/sql-injection" ]
