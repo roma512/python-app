@@ -3,6 +3,15 @@ node("master"){
     stage("Download source code"){
         git credentialsId: 'git-ssh', url: 'git@github.com:roma512/python-app.git'
     }
+    stage("check SAST"){
+        withCredentials([string(credentialsId: 'sonar-token', variable: 'token')]) {
+            sh "sonar-scanner \
+                -Dsonar.projectKey=my-python-app \
+                -Dsonar.sources=. \
+                -Dsonar.host.url=http://192.168.1.6:9000 \
+                -Dsonar.token=${token}"
+        }
+    }
     stage("Compilation app"){
         sh"""pyinstaller --add-data "templates/profile.html:templates/profile.html" --add-data "templates/vulnerable.html:templates/vulnerable.html" sql-injection.py"""
     }
