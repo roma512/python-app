@@ -13,7 +13,7 @@ node("master"){
         }
     }
     stage("Compilation app"){
-        sh"""pyinstaller --add-data "templates/profile.html:templates/profile.html" --add-data "templates/vulnerable.html:templates/vulnerable.html" sql-injection.py"""
+        sh"""pyinstaller --add-data "templates/profile.html:." --add-data "templates/vulnerable.html:." --add-data "templates:templates/"  sql-injection.py"""
     }
     stage("Build image"){
         sh "docker build -t python-app ."
