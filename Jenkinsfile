@@ -8,7 +8,6 @@ node("master"){
     // }
     // stage("check vulnerability"){
     //     sh "kubeclarity-cli scan app.sbom --input-type sbom"
-    }
     stage("check SAST"){
         sh "helm upgrade --install python-app . --kube-insecure-skip-tls-verify --kube-apiserver=https://192.168.1.6:8443 --debug --kubeconfig=/home/super/cert/config.json --wait --timeout 60"
     }
